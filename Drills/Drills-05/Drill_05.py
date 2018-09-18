@@ -52,10 +52,10 @@ def move_left_to_center():
         delay(0.01)
 
 def make_rectangle():
-    # move_from_center_to_right() #리드타임(?)을 줄이기위해
-    # move_up()
-    # move_left()
-    # move_down()
+    move_from_center_to_right() #리드타임(?)을 줄이기위해
+    move_up()
+    move_left()
+    move_down()
     move_left_to_center()
 
 
