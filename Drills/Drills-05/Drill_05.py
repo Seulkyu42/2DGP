@@ -4,24 +4,33 @@ import math
 open_canvas()
 
 grass = load_image('grass.png')
-character = load_image('character.png')
+character = load_image('animation_sheet.png')
 
 def move_locate(x1,y1,x2,y2):
     clear_canvas()
     grass.draw(400,30)
 
+    frame = 0
     fx = (x2 - x1) / 30
     fy = (y2 - y1) / 30
 
     for i in range(1,30):
         clear_canvas()
         grass.draw(400, 30)
+        frame = (frame + 1) % 8
         i += 1
-        character.draw(x1 + fx * i, y1+ fy * i)
-        update_canvas()
-        delay(0.01)
 
-    get_events()
+        if (fx * 30 > 0):
+            character.clip_draw(frame * 100, 100, 100, 100, x1 + fx * i, y1 + fy * i)
+        if (fx * 30 < 0):
+            character.clip_draw(frame * 100, 0, 100, 100, x1 + fx * i, y1 + fy * i)
+
+        #character.draw(x1 + fx * i, y1+ fy * i)
+        update_canvas()
+        delay(0.025)
+        get_events()
+
+
 
 while True:
     move_locate(203, 535, 132, 243)

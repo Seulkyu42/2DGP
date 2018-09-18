@@ -4,7 +4,7 @@ import math
 open_canvas()
 
 grass = load_image('grass.png')
-character = load_image('character.png')
+character = load_image('animation_sheet.png')
 
 x = 410
 y = 90
