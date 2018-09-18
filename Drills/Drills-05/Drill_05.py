@@ -43,13 +43,19 @@ def move_down():
         delay(0.01)
 
 def move_left_to_center():
-    pass
+    x, y = 25, 90
+    while x < 800 // 2:
+        clear_canvas_now()
+        grass.draw_now(400, 30)
+        character.draw_now(x, y)
+        x += 2
+        delay(0.01)
 
 def make_rectangle():
     # move_from_center_to_right() #리드타임(?)을 줄이기위해
     # move_up()
     # move_left()
-    move_down()
+    # move_down()
     move_left_to_center()
 
 
