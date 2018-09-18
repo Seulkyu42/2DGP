@@ -6,7 +6,21 @@ open_canvas()
 grass = load_image('grass.png')
 character = load_image('character.png')
 
-def calculate(x1,y1,x2,y2)
+def calculate(x1,y1,x2,y2):
+    fx,fy =  (x2 - x1), (y2 - y1)
+
+    if (fx > 0):
+        switch = 1
+        return switch
+
+    elif(fx < 0):
+        switch = 2
+        return switch
+
+
+
+
+
 
 def move_locate(x1,y1,x2,y2):
     clear_canvas()
