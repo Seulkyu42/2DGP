@@ -6,11 +6,15 @@ open_canvas()
 grass = load_image('grass.png')
 character = load_image('character.png')
 
-def move_locate():
-    pass
+def move_locate(x,y):
+    clear_canvas()
+    grass.draw(400,30)
+    character.draw(x,y)
+
+    update_canvas()
+    delay(0.01)
 
 while True:
-    move_locate()
-
+    move_locate(203,535)
 
 close_canvas()
