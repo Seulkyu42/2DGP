@@ -48,9 +48,9 @@ while running:
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     cursor.draw(x, y)
     if (fx * 30 < 0):
-        character.clip_draw(frame * 100, 100, 100, 100, x1, y1 )
+        character.clip_draw(frame * 100, 100, 100, 100, x1-30, y1+30 )
     elif (fx * 30 > 0):
-        character.clip_draw(frame * 100, 0, 100, 100, x1, y1)
+        character.clip_draw(frame * 100, 0, 100, 100, x1-30, y1+30)
     if(count < 30):
         x1 -= fx
         y1 -= fy
