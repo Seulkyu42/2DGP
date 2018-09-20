@@ -43,14 +43,7 @@ fx,fy = 0,0
 frame = 0
 hide_cursor()
 
-
-
-while running:
-    clear_canvas()
-    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-    cursor.draw(x, y)
-    update_canvas()
-
+def move():
     for i in range(1, 30):
         i += 1
         if (fx * 30 < 0):
@@ -58,6 +51,13 @@ while running:
         if (fx * 30 > 0):
             character.clip_draw(frame * 100, 0, 100, 100, x2 + fx * i, y2 + fy * i)
 
+
+while running:
+    clear_canvas()
+    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+    cursor.draw(x, y)
+    update_canvas()
+    move()
     update_canvas()
     get_events()
     frame = (frame + 1) % 8
