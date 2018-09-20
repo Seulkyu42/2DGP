@@ -43,12 +43,15 @@ frame = 0
 hide_cursor()
 
 def move():
+    running = False
     for i in range(1,30):
         i += 1
         if (fx * 30 < 0):
             character.clip_draw(frame * 100, 100, 100, 100, x2 + fx * i, y2 + fy * i)
         if (fx * 30 > 0):
             character.clip_draw(frame * 100, 0, 100, 100, x2 + fx * i, y2 + fy * i)
+        if(i > 29):
+            running = True
 
 while running:
     clear_canvas()
