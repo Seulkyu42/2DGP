@@ -17,10 +17,9 @@ def handle_events():
         elif event.type == SDL_MOUSEMOTION:
             x, y = event.x, KPU_HEIGHT - 1 - event.y
         elif event.type == SDL_MOUSEBUTTONDOWN:
-            x1, y1 = event.x, KPU_HEIGHT - 1 - event.y
+            x1,y1 = x2 ,y2
+            x2, y2 = event.x, KPU_HEIGHT - 1 - event.y
 
-            fx = (x1 - x2) / 30
-            fy = (y1 - y2) / 30
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
@@ -31,9 +30,12 @@ cursor = load_image('hand_arrow.png')
 
 running = True
 x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
-x1,y1,x2,y2 = KPU_WIDTH // 2, KPU_HEIGHT // 2,0,0
 
-fx,fy = KPU_WIDTH // 2, KPU_HEIGHT // 2
+x1,y1 = KPU_WIDTH // 2, KPU_HEIGHT // 2
+x2, y2 = x1,y1
+
+fx = (x2 - x1) / 30
+fy = (y2 - y1) / 30
 
 frame = 0
 hide_cursor()
