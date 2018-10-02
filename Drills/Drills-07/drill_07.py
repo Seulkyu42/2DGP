@@ -46,6 +46,9 @@ while running:
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
 
+    draw_line((x[i - 1], y[i - 1]), (x[i], y[i]))
+    i = (i + 1) % 20
+
     update_canvas()
     get_events()
     delay(0.02)
