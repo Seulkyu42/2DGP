@@ -15,10 +15,10 @@ def handle_events():
 frame = 0
 def draw_line(p1,p2):
     global frame
-    for i in range(0,300 + 1, 1):
+    for i in range(0,250 + 1, 1):
         clear_canvas()
         kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-        t = i / 300
+        t = i / 250
         frame = (frame + 1) % 8
         x = (1 - t)*p1[0]+t*p2[0]
         y = (1 - t)*p1[1]+t*p2[1]
