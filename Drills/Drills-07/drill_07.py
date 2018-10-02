@@ -31,6 +31,9 @@ def draw_line(p1,p2):
 
         update_canvas()
 
+x = [random.randint(50,1100) for i in range(20)]
+y = [random.randint(50,900) for i in range(20)]
+
 open_canvas(KPU_WIDTH,KPU_HEIGHT)
 kpu_ground = load_image('KPU_GROUND.png')
 character = load_image('animation_sheet.png')
