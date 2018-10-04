@@ -13,13 +13,14 @@ def handle_events():
             running = False
 
 
+x = [random.randint(50,1100) for i in range(11)]
+y = [random.randint(50,900) for i in range(11)]
 
 open_canvas(KPU_WIDTH,KPU_HEIGHT)
 kpu_ground = load_image('KPU_GROUND.png')
 character = load_image('animation_sheet.png')
 
 running = True
-
 
 while running:
     clear_canvas()
