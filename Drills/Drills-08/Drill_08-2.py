@@ -28,11 +28,13 @@ def draw_curve_3_points(p1, p2, p3):
         fx1 = (p2[0] - p3[0])
 
         if (fx < 0 and i < 500):
-
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx > 0 and i <500):
             character.clip_draw(frame * 100, 0, 100, 100, x, y)
-
+        if (fx < 0 and i == 500):
+            Location.draw(x, y)
+        elif (fx > 0 and i == 500):
+            Location.draw(x, y)
         if (fx1 < 0 and i > 499):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx1 > 0 and i > 499):
@@ -60,12 +62,10 @@ def draw_curve_4_points(p1, p2, p3, p4):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx > 0 and i < 500):
             character.clip_draw(frame * 100, 0, 100, 100, x, y)
-
         if (fx < 0 and i == 500):
-            character.draw(x, y)
+            Location.draw(x, y)
         elif (fx > 0 and i == 500):
-            character.draw(x, y)
-
+            Location.draw(x, y)
         if (fx1 < 0 and i > 499):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx1 > 0 and i > 499):
@@ -89,12 +89,10 @@ def draw_curve_4_points(p1, p2, p3, p4):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx > 0 and i < 500):
             character.clip_draw(frame * 100, 0, 100, 100, x, y)
-
         if (fx < 0 and i == 500):
-            character.draw(x, y)
+            Location.draw(x, y)
         elif (fx > 0 and i == 500):
-            character.draw(x, y)
-
+            Location.draw(x, y)
         if (fx1 < 0 and i > 499):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx1 > 0 and i > 499):
@@ -106,6 +104,7 @@ def draw_curve_4_points(p1, p2, p3, p4):
     for i in range(500, 1000, 2):
         clear_canvas()
         kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+
         frame = (frame + 1) % 8
 
         t = i / 1000
@@ -121,9 +120,9 @@ def draw_curve_4_points(p1, p2, p3, p4):
             character.clip_draw(frame * 100, 0, 100, 100, x, y)
 
         if (fx < 0 and i == 500):
-            character.draw(x, y)
+            Location.draw(x, y)
         elif (fx > 0 and i == 500):
-            character.draw(x, y)
+            Location.draw(x, y)
 
         if (fx1 < 0 and i > 499):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
@@ -131,19 +130,20 @@ def draw_curve_4_points(p1, p2, p3, p4):
             character.clip_draw(frame * 100, 0, 100, 100, x, y)
         update_canvas()
 
-
-x = [random.randint(50,1100) for i in range(11)]
-y = [random.randint(50,900) for i in range(11)]
+x = [random.randint(50,1100) for i in range(12)]
+y = [random.randint(50,900) for i in range(12)]
 
 open_canvas(KPU_WIDTH,KPU_HEIGHT)
 kpu_ground = load_image('KPU_GROUND.png')
 character = load_image('animation_sheet.png')
+Location = load_image('Location.png')
 
 running = True
 
 while running:
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+    Location.draw(400,300)
 
     draw_curve_4_points((x[0], y[0]), (x[1], y[1]), (x[2], y[2]), (x[3], y[3]))
     draw_curve_4_points((x[3], y[3]), (x[4], y[4]), (x[5], y[5]), (x[6], y[6]))
@@ -156,7 +156,6 @@ while running:
     #draw_curve_3_points((x[6], y[6]), (x[7], y[7]), (x[8], y[8]))
     #draw_curve_3_points((x[8], y[8]), (x[9], y[9]), (x[10], y[10]))
     #draw_curve_3_points((x[10], y[10]), (x[11], y[11]), (x[0], y[0]))
-
 
     update_canvas()
     get_events()
