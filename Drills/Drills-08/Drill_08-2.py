@@ -14,15 +14,30 @@ def handle_events():
 
 
 def draw_curve_3_points(p1, p2, p3):
-
+    frame = 0
+    global fx,fx1
     for i in range(0,1000+1,1):
-
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
         t = i / 1000
-
+        frame = (frame + 1) % 8
         x = (2*t**2-3*t+1)*p1[0]+(-4*t**2+4*t)*p2[0]+(2*t**2-t)*p3[0]
         y = (2*t**2-3*t+1)*p1[1]+(-4*t**2+4*t)*p2[1]+(2*t**2-t)*p3[1]
 
+        fx = (p1[0] - p2[0])
+        fx1 = (p2[0] - p3[0])
 
+        if (fx < 0 and i < 500):
+
+            character.clip_draw(frame * 100, 100, 100, 100, x, y)
+        elif (fx > 0 and i <500):
+            character.clip_draw(frame * 100, 0, 100, 100, x, y)
+
+        if (fx1 < 0 and i > 499):
+            character.clip_draw(frame * 100, 100, 100, 100, x, y)
+        elif (fx1 > 0 and i > 499):
+            character.clip_draw(frame * 100, 0, 100, 100, x, y)
+        update_canvas()
 
 x = [random.randint(50,1100) for i in range(11)]
 y = [random.randint(50,900) for i in range(11)]
