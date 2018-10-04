@@ -61,6 +61,11 @@ def draw_curve_4_points(p1, p2, p3, p4):
         elif (fx > 0 and i < 500):
             character.clip_draw(frame * 100, 0, 100, 100, x, y)
 
+        if (fx < 0 and i == 500):
+            character.draw(x, y)
+        elif (fx > 0 and i == 500):
+            character.draw(x, y)
+
         if (fx1 < 0 and i > 499):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx1 > 0 and i > 499):
@@ -84,6 +89,11 @@ def draw_curve_4_points(p1, p2, p3, p4):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx > 0 and i < 500):
             character.clip_draw(frame * 100, 0, 100, 100, x, y)
+
+        if (fx < 0 and i == 500):
+            character.draw(x, y)
+        elif (fx > 0 and i == 500):
+            character.draw(x, y)
 
         if (fx1 < 0 and i > 499):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
@@ -109,6 +119,11 @@ def draw_curve_4_points(p1, p2, p3, p4):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
         elif (fx > 0 and i < 500):
             character.clip_draw(frame * 100, 0, 100, 100, x, y)
+
+        if (fx < 0 and i == 500):
+            character.draw(x, y)
+        elif (fx > 0 and i == 500):
+            character.draw(x, y)
 
         if (fx1 < 0 and i > 499):
             character.clip_draw(frame * 100, 100, 100, 100, x, y)
