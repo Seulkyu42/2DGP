@@ -52,6 +52,14 @@ while running:
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
 
+    #draw_curve_3_points((x[0], y[0]), (x[1], y[1]),(x[2], y[2]))
+    #draw_curve_3_points((x[2], y[2]), (x[3], y[3]), (x[4], y[4]))
+    #draw_curve_3_points((x[4], y[4]), (x[5], y[5]), (x[6], y[6]))
+    #draw_curve_3_points((x[6], y[6]), (x[7], y[7]), (x[8], y[8]))
+    #draw_curve_3_points((x[8], y[8]), (x[9], y[9]), (x[10], y[10]))
+    #draw_curve_3_points((x[10], y[10]), (x[11], y[11]), (x[0], y[0]))
+
+
     update_canvas()
     get_events()
 
