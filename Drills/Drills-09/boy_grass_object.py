@@ -41,8 +41,10 @@ running = True;
 while running:
     handle_events()
 
-    boy.update()
+    for boy in team:
+        boy.update()
 
+        
     clear_canvas()
     grass.draw()
     boy.draw()
