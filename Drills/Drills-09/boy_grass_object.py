@@ -21,6 +21,17 @@ class Boy:
     def draw(self):
         self.image.clip_draw(self.frame*100,0,100,100,self.x,self.y)
 
+class Ball:
+    def __init__(self):
+        self.x, self.y = random.randint(100,700),599
+        self.speed = random.randint(1, 10)
+        self.make = random.randint(1,2)
+        if(self.make == 1):
+            self.image = load_image('ball21x21.png')
+        elif(self.make == 2):
+            self.image = load_image('ball41x41.png')
+
+
 def handle_events():
     global running
     events = get_events()
@@ -44,7 +55,9 @@ while running:
     for boy in team:
         boy.update()
 
-        
+    for boy in team:
+        boy.draw()
+
     clear_canvas()
     grass.draw()
     boy.draw()
