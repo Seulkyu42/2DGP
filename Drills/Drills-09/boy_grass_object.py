@@ -1,4 +1,5 @@
 from pico2d import *
+import random
 
 class Grass:
     def __init__(self):
@@ -9,8 +10,8 @@ class Grass:
 
 class Boy:
     def __init__(self):
-        self.x, self.y = 0,90
-        self.frame = 0
+        self.x, self.y = random.randint(100,700),90
+        self.frame = random.randint(0,7)
         self.image = load_image('run_animation.png')
 
     def update(self):
@@ -31,6 +32,7 @@ def handle_events():
 
 open_canvas()
 
+team = [Boy() for i in range(11)]
 boy = Boy()
 grass = Grass()
 
