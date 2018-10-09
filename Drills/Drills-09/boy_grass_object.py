@@ -24,13 +24,20 @@ class Boy:
 class Ball:
     def __init__(self):
         self.x, self.y = random.randint(100,700),599
+
         self.speed = random.randint(1, 10)
         self.make = random.randint(1,2)
+
         if(self.make == 1):
             self.image = load_image('ball21x21.png')
         elif(self.make == 2):
             self.image = load_image('ball41x41.png')
 
+    def drop(self):
+        if(self.make == 1 and self.y > 65):
+            self.y = self.y - self.speed
+        elif(self.make == 2 and self.y > 75):
+            self.y = self.y - self.speed
 
 def handle_events():
     global running
