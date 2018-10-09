@@ -33,6 +33,9 @@ class Ball:
         elif(self.make == 2):
             self.image = load_image('ball41x41.png')
 
+    def draw(self):
+        self.image.draw(self.x,self.y)
+
     def drop(self):
         if(self.make == 1 and self.y > 65):
             self.y = self.y - self.speed
@@ -51,6 +54,8 @@ def handle_events():
 open_canvas()
 
 team = [Boy() for i in range(11)]
+teamBall = [Ball() for i in range(20)]
+ball = Ball()
 boy = Boy()
 grass = Grass()
 
