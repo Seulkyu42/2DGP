@@ -59,7 +59,7 @@ ball = Ball()
 boy = Boy()
 grass = Grass()
 
-running = True;
+running = True
 
 while running:
     handle_events()
@@ -67,15 +67,20 @@ while running:
     for boy in team:
         boy.update()
 
+    clear_canvas()
+    grass.draw()
+
     for boy in team:
         boy.draw()
 
-    clear_canvas()
-    grass.draw()
-    boy.draw()
+    for ball in teamBall:
+        ball.drop()
+
+    for ball in teamBall:
+        ball.draw()
+
     update_canvas()
 
     delay(0.05)
 
-
-# finalization code
+close_canvas()
