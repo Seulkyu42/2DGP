@@ -16,10 +16,12 @@ def exit():
 
 
 def update():
-    pass
+
+    update_canvas()
 
 def draw():
     global image
+    clear_canvas()
     image.draw(400, 300)
 
 def handle_events():
