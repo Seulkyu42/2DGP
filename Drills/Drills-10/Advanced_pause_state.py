@@ -3,11 +3,12 @@ from pico2d import *
 import title_state
 import main_state
 
-name = "Pause"
+name = "AdvancedPause"
 image = None
 grass = None
 boy = None
 stop = None
+pause_time = 0
 
 class Pause:
     def __init__(self):
@@ -15,7 +16,13 @@ class Pause:
 
     def draw(self):
         global pause_time
-        self.image.draw(400, 300)
+        if(pause_time > 50):
+            pause_time += 1
+            if(pause_time > 100):
+                pause_time = 0
+        else :
+            self.image.draw(400, 300)
+            pause_time += 1
 
     def update(self):
         pass
@@ -55,7 +62,7 @@ def exit():
     del(boy)
     del(grass)
     del(stop)
-    
+
 def handle_events():
     events = get_events()
     for event in events:
