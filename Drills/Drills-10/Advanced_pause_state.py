@@ -51,17 +51,11 @@ def enter():
     stop = Pause();
 
 def exit():
-    global image
-    del(image)
-
-def update():
-    update_canvas()
-
-def draw():
-    global image
-    clear_canvas()
-    image.draw(400, 300)
-
+    global boy, grass, stop
+    del(boy)
+    del(grass)
+    del(stop)
+    
 def handle_events():
     events = get_events()
     for event in events:
@@ -75,8 +69,12 @@ def handle_events():
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_p):
                 game_framework.pop_state()
 
-def pause():
-    pass
+def update():
+    stop.update()
 
-def resume():
-    pass
+def draw():
+    clear_canvas()
+    grass.draw()
+    boy.draw()
+    stop.draw()
+    update_canvas()
