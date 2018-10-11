@@ -55,7 +55,7 @@ def enter():
     global boy,grass,stop
     boy = Boy()
     grass = Grass()
-    stop = Pause();
+    stop = Pause()
 
 def exit():
     global boy, grass, stop
