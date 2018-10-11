@@ -14,9 +14,7 @@ def exit():
     global image
     del(image)
 
-
 def update():
-
     update_canvas()
 
 def draw():
@@ -36,7 +34,6 @@ def handle_events():
                 game_framework.change_state(title_state)
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_p):
                 game_framework.pop_state()
-
 
 def pause():
     pass
