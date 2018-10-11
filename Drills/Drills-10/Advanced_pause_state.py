@@ -6,6 +6,17 @@ import main_state
 name = "Pause"
 image = None
 
+class Pauses:
+    def __init__(self):
+        self.image = load_image('PAUSE.png')
+
+    def draw(self):
+        global pause_time
+        self.image.draw(400, 300)
+
+    def update(self):
+        pass
+
 def enter():
     global image
     image = load_image('pause.png')
