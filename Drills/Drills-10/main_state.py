@@ -14,8 +14,6 @@ boy = None
 grass = None
 font = None
 
-
-
 class Grass:
     def __init__(self):
         self.image = load_image('grass.png')
