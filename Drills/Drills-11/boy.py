@@ -162,7 +162,7 @@ next_state_table = {
                   },
 
     DashState :  { RIGHT_UP : IdleState, LEFT_UP : IdleState, RIGHT_DOWN : IdleState, LEFT_DOWN : IdleState,
-                 LSHIFT_UP : RunState}
+                 LSHIFT_UP : RunState, RSHIFT_UP : RunState}
 }
 
 class Boy:
