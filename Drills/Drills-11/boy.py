@@ -112,20 +112,23 @@ class SleepState:
                                           -3.141592 / 2, '',boy.x + 25, boy.y - 25, 100, 100)
 
 class DashState:
+
     @staticmethod
-    def enter(boy):
+    def enter(boy, event):
         boy.time = 300
         boy.frame = 0
         boy.dir = boy.velocity
 
     @staticmethod
-    def exit(boy):
+    def exit(boy, event):
         pass
 
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
+        boy.time -= 5
         boy.x += boy.velocity * 3
+
 
         boy.x = clamp(25, boy.x, 1600 - 25)
 
@@ -138,20 +141,24 @@ class DashState:
 
 
 next_state_table = {
-    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
+    IdleState: { RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
                 SLEEP_TIMER : SleepState, SPACE : IdleState,
                 LSHIFT_DOWN : IdleState, LSHIFT_UP : IdleState,
                 RSHIFT_DOWN: IdleState, RSHIFT_UP: IdleState,
                 },
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
+
+    RunState: { RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState,
                SPACE : RunState,
                RSHIFT_DOWN: DashState, RSHIFT_UP: RunState,
                LSHIFT_DOWN: DashState, LSHIFT_UP: RunState},
 
-    SleepState : {RIGHT_UP: RunState, LEFT_UP: RunState, LEFT_DOWN: RunState, RIGHT_DOWN: RunState,
-                  SPACE : IdleState},
+    SleepState : { RIGHT_UP: RunState, LEFT_UP: RunState, LEFT_DOWN: RunState, RIGHT_DOWN: RunState,
+                  SPACE : IdleState,
+                  RSHIFT_DOWN: IdleState, RSHIFT_UP: IdleState,
+                  LSHIFT_DOWN: IdleState, LSHIFT_UP: IdleState
+                  },
 
-    DashState :  {RIGHT_UP : IdleState, LEFT_UP : IdleState, RIGHT_DOWN : IdleState, LEFT_DOWN : IdleState,
+    DashState :  { RIGHT_UP : IdleState, LEFT_UP : IdleState, RIGHT_DOWN : IdleState, LEFT_DOWN : IdleState,
                  LSHIFT_UP : RunState}
 }
 
@@ -171,8 +178,6 @@ class Boy:
     def fire_ball(self):
         ball = Ball(self.x, self.y, self.dir * 3)
         game_world.add_object(ball,1)
-
-
 
     def add_event(self, event):
         self.event_que.insert(0, event)
