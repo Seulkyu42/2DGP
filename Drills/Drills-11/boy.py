@@ -50,7 +50,6 @@ class IdleState:
         else:
             boy.image.clip_draw(boy.frame * 100, 200, 100, 100, boy.x, boy.y)
 
-
 class RunState:
 
     @staticmethod
@@ -84,7 +83,6 @@ class RunState:
             boy.image.clip_draw(boy.frame * 100, 100, 100, 100, boy.x, boy.y)
         else:
             boy.image.clip_draw(boy.frame * 100, 0, 100, 100, boy.x, boy.y)
-
 
 class SleepState:
 
