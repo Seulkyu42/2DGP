@@ -129,8 +129,11 @@ class DashState:
         boy.time -= 5
         boy.x += boy.velocity * 3
 
-
         boy.x = clamp(25, boy.x, 1600 - 25)
+
+        if (boy.time == 0):
+            boy.add_event(LSHIFT_UP)
+            boy.add_event(RSHIFT_UP)
 
     @staticmethod
     def draw(boy):
