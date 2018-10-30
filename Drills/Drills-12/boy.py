@@ -107,6 +107,8 @@ class SleepState:
 
     @staticmethod
     def enter(boy, event):
+        global Idle_Time
+        Idle_Time = get_time()
         boy.frame = 0
 
     @staticmethod
@@ -115,7 +117,10 @@ class SleepState:
 
     @staticmethod
     def do(boy):
+        global Idle_Time
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        if get_time() - Idle_Time >= 1:
+            boy.add_event(Ghost)
 
     @staticmethod
     def draw(boy):
@@ -124,7 +129,38 @@ class SleepState:
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
 
+class GhostState:
+    @staticmethod
+    def enter(boy, event):
+        boy.x = 0
+        boy.y = 0
 
+    @staticmethod
+    def exit(boy, event):
+        pass
+
+    @staticmethod
+    def do(boy):
+        boy.x = 100 * math.sin(boy.angle * 3.14 / 360)
+        boy.y = 100 + 100 * -math.cos(boy.angle * 3.14 / 360)
+        boy.angle += 1440 * game_framework.frame_time
+
+        boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+
+
+    @staticmethod
+    def draw(boy):
+        if boy.dir == 1:
+            boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.save_x + boy.x, boy.save_y + boy.y)
+            boy.image.opacify(1)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.save_x - 25, boy.save_y - 25, 100, 100)
+            boy.image.opacify(0.5)
+
+        else:
+            boy.image.clip_draw(int(boy.frame) * 100, 200, 100, 100, boy.save_x + boy.x, boy.save_y + boy.y)
+            boy.image.opacify(1)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.save_x + 25, boy.save_y - 25, 100, 100)
+            boy.image.opacify(0.5)
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SLEEP_TIMER: SleepState, SPACE: IdleState},
@@ -145,6 +181,11 @@ class Boy:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
+        self.save_x = self.x
+        self.save_y = self.y
+        self.angle = 0
+        self.sp = 0
+        self.size = 0
 
 
     def fire_ball(self):
