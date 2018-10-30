@@ -19,7 +19,7 @@ ACTION_PER_TIME = 1.0
 FRAMES_PER_ACTION = 8
 
 # Boy Event
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SPACE, Ghost = range(6)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SPACE, Ghost = range(7)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -58,6 +58,8 @@ class IdleState:
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         # 10초 차이가나면
         if get_time() - Idle_Time >= 10:
+            boy.save_x = boy.x
+            boy.save_y = boy.y
             boy.add_event(SLEEP_TIMER)
 
     @staticmethod
@@ -71,6 +73,8 @@ class IdleState:
 class RunState:
     @staticmethod
     def enter(boy, event):
+        boy.x = boy.save_x
+        boy.y = boy.save_y
         global Idle_Time
         if event == RIGHT_DOWN:
             boy.velocity += RUN_SPEED_PPS
@@ -91,6 +95,8 @@ class RunState:
 
     @staticmethod
     def do(boy):
+        boy.save_x = boy.x
+        boy.save_y = boy.y
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) %8
         boy.x += boy.velocity * game_framework.frame_time
         boy.x = clamp(25, boy.x, 1600 - 25)
@@ -99,8 +105,10 @@ class RunState:
     def draw(boy):
         if boy.dir == 1:
             boy.image.clip_draw(int(boy.frame) * 100, 100, 100, 100, boy.x, boy.y)
+            boy.image.opacify(1)
         else:
             boy.image.clip_draw(int(boy.frame) * 100, 0, 100, 100, boy.x, boy.y)
+            boy.image.opacify(1)
 
 
 class SleepState:
