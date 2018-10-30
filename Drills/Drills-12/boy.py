@@ -163,9 +163,10 @@ class GhostState:
             boy.image.opacify(0.5)
 
 next_state_table = {
-    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SLEEP_TIMER: SleepState, SPACE: IdleState},
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
-    SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP: RunState, SPACE: IdleState}
+    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SLEEP_TIMER: SleepState ,SPACE: IdleState, Ghost : GhostState},
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState, Ghost : GhostState},
+    SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP: RunState, SPACE: IdleState, Ghost : GhostState},
+    GhostState : {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: IdleState, RIGHT_UP: IdleState, SPACE: IdleState, Ghost : GhostState}
 }
 
 class Boy:
@@ -206,7 +207,7 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - 60, self.y + 50, '(Time : %3.2f)' % get_time(), (255,255,20))
+        self.font.draw(self.save_x - 60, self.save_y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
