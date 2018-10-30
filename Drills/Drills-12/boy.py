@@ -29,6 +29,7 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_SPACE): SPACE
 }
 
+Idle_Time = 0.0
 
 # Boy States
 
@@ -43,7 +44,7 @@ class IdleState:
             boy.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             boy.velocity += RUN_SPEED_PPS
-        boy.timer = 1000
+
 
     @staticmethod
     def exit(boy, event):
@@ -53,9 +54,10 @@ class IdleState:
 
     @staticmethod
     def do(boy):
+        global Idle_Time
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        boy.timer -= 1
-        if boy.timer == 0:
+        # 10초 차이가나면
+        if get_time() - Idle_Time >= 10:
             boy.add_event(SLEEP_TIMER)
 
     @staticmethod
@@ -69,13 +71,16 @@ class IdleState:
 class RunState:
     @staticmethod
     def enter(boy, event):
+        global Idle_Time
         if event == RIGHT_DOWN:
             boy.velocity += RUN_SPEED_PPS
         elif event == LEFT_DOWN:
             boy.velocity -= RUN_SPEED_PPS
         elif event == RIGHT_UP:
+            Idle_Time = 0.0
             boy.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
+            Idle_Time = 0.0
             boy.velocity += RUN_SPEED_PPS
         boy.dir = clamp(-1,boy.velocity,1)
 
