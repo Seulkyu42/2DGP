@@ -110,6 +110,8 @@ class SleepState:
         global Idle_Time
         Idle_Time = get_time()
         boy.frame = 0
+        boy.size = 0
+        boy.sp = -10
 
     @staticmethod
     def exit(boy, event):
@@ -119,15 +121,25 @@ class SleepState:
     def do(boy):
         global Idle_Time
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        boy.sp += 1
+        boy.size += 0.23
         if get_time() - Idle_Time >= 1:
+            boy.save_x = boy.x
+            boy.save_y = boy.y
             boy.add_event(Ghost)
 
     @staticmethod
     def draw(boy):
         if boy.dir == 1:
-            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2 - boy.sp / 45, '', boy.save_x-10, boy.save_y-7 + boy.size, 10*boy.size, 10*boy.size)
+            boy.image.opacify(1)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.save_x - 25, boy.save_y - 25, 100, 100)
+            boy.image.opacify(0.5)
         else:
-            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2 + boy.sp / 45, '', boy.save_x  +  10, boy.save_y-7 + boy.size, 10*boy.size, 10*boy.size)
+            boy.image.opacify(1)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.save_x + 25, boy.save_y - 25, 100, 100)
+            boy.image.opacify(0.5)
 
 class GhostState:
     @staticmethod
