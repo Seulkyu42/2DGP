@@ -119,7 +119,7 @@ class SleepState:
         Idle_Time = get_time()
         boy.frame = 0
         boy.size = 0
-        boy.sp = -10
+        boy.sp = -20
 
     @staticmethod
     def exit(boy, event):
@@ -129,8 +129,8 @@ class SleepState:
     def do(boy):
         global Idle_Time
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        boy.sp += 1
-        boy.size += 0.23
+        boy.sp += 0.45
+        boy.size += 0.05
         if get_time() - Idle_Time >= 1:
             boy.save_x = boy.x
             boy.save_y = boy.y
