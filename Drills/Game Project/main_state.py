@@ -8,19 +8,22 @@ import game_world
 
 from Muk import Muk
 from background import Back
+from Grass import Grass
 
 name = "MainState"
 
 muk = None
 back = None
+grass = None
 
 def enter():
-    global muk,back
+    global muk,back,grass
     muk = Muk()
     back = Back()
+    grass = Grass()
     game_world.add_object(back, 0)
     game_world.add_object(muk, 1)
-
+    game_world.add_object(grass,2)
 
 def exit():
     game_world.clear()
