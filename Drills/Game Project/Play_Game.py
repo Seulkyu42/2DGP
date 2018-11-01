@@ -1,8 +1,8 @@
 import Framework
 import pico2d
 
-import Muk
+import main_state
 
 pico2d.open_canvas(1600, 900)
-Framework.run(Muk)
+Framework.run(main_state)
 pico2d.close_canvas()

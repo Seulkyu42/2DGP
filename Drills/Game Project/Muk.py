@@ -1,5 +1,8 @@
 import Framework
 from pico2d import *
+import os
+
+os.chdir("C:\\Users\\김민규\\Documents\\Github\\2DGP\\Drills\\Game Project\\Resources")
 
 PIXEL_PER_METER = (10.0/0.3)
 RUN_SPEED_KMPH = 20.0
@@ -76,7 +79,6 @@ class Muk:
         self.x, self.y = 1600 // 2, 90
         self.Idle_image = load_image("Idle.png")
         self.Run_image = load_image("Right_run.png")
-        self.font = load_font('ENCR10B.TTF', 16)
         self.dir = 1
         self.velocity = 0
         self.frame = 0
@@ -97,7 +99,6 @@ class Muk:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - 60, self.y + 50, '(Time : %3.2f)' % get_time(), (255,255,20))
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
