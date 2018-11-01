@@ -41,7 +41,7 @@ class IdleState:
 
     @staticmethod
     def do(muk):
-        muk.frame = (muk.frame + Frame_Idle * ACTION_PER_TIME * Framework.frame_time) % 8
+        muk.frame = (muk.frame + Frame_Idle * ACTION_PER_TIME * Framework.frame_time) % 4
 
     @staticmethod
     def draw(muk):
@@ -61,7 +61,7 @@ class RunState:
 
     @staticmethod
     def do(muk):
-        muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) %8
+        muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
         muk.x += muk.velocity * Framework.frame_time
 
     @staticmethod
@@ -76,7 +76,7 @@ next_state_table = {
 
 class Muk:
     def __init__(self):
-        self.x, self.y = 1600 // 2, 90
+        self.x, self.y = 0, 90
         self.Idle_image = load_image("Idle.png")
         self.Run_image = load_image("Right_run.png")
         self.dir = 1

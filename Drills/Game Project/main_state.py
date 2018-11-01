@@ -7,17 +7,18 @@ import Framework
 import game_world
 
 from Muk import Muk
-#from grass import Grass
+from background import Back
 
 name = "MainState"
 
 muk = None
+back = None
 
 def enter():
-    global muk
+    global muk,back
     muk = Muk()
-    #grass = Grass()
-    #game_world.add_object(grass, 0)
+    back = Back()
+    game_world.add_object(back, 0)
     game_world.add_object(muk, 1)
 
 
