@@ -25,11 +25,10 @@ key_event_table = {
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYDOWN, SDLK_SPACE): SPACE,
     (SDL_KEYDOWN, SDLK_1) : Mode1,
-    (SDL_KEYDOWN, SDLK_2) : Mode1,
-    (SDL_KEYDOWN, SDLK_3) : Mode1,
-    (SDL_KEYDOWN, SDLK_4) : Mode1
+    (SDL_KEYDOWN, SDLK_2) : Mode2,
+    (SDL_KEYDOWN, SDLK_3) : Mode3,
+    (SDL_KEYDOWN, SDLK_4) : Mode4
 }
-
 
 class IdleState:
     @staticmethod
@@ -55,8 +54,29 @@ class RunState:
     @staticmethod
     def enter(muk, event):
         if Mode == 1:
-            muk.add_event()
+            muk.add_event(RunState_Mode1)
+        elif Mode == 2:
+            muk.add_event(RunState_Mode2)
+        elif Mode == 3:
+            muk.add_event(RunState_Mode3)
+        elif Mode == 4:
+            muk.add_event(RunState_Mode4)
 
+    @staticmethod
+    def exit(muk, event):
+        pass
+
+    @staticmethod
+    def do(muk):
+        pass
+
+    @staticmethod
+    def draw(muk):
+        pass
+
+class RunState_Mode1:
+    @staticmethod
+    def enter(muk, event):
         if event == RIGHT_DOWN:
             muk.velocity += RUN_SPEED_PPS
         elif event == RIGHT_UP:
@@ -77,6 +97,74 @@ class RunState:
         muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
         pass
 
+class RunState_Mode2:
+    @staticmethod
+    def enter(muk, event):
+        if event == RIGHT_DOWN:
+            muk.velocity += RUN_SPEED_PPS
+        elif event == RIGHT_UP:
+            muk.velocity -= RUN_SPEED_PPS
+
+    @staticmethod
+    def exit(muk, event):
+        pass
+
+    @staticmethod
+    def do(muk):
+        muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
+        muk.x += muk.velocity * Framework.frame_time
+        pass
+
+    @staticmethod
+    def draw(muk):
+        muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
+        pass
+
+class RunState_Mode3:
+    @staticmethod
+    def enter(muk, event):
+        if event == RIGHT_DOWN:
+            muk.velocity += RUN_SPEED_PPS
+        elif event == RIGHT_UP:
+            muk.velocity -= RUN_SPEED_PPS
+
+    @staticmethod
+    def exit(muk, event):
+        pass
+
+    @staticmethod
+    def do(muk):
+        muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
+        muk.x += muk.velocity * Framework.frame_time
+        pass
+
+    @staticmethod
+    def draw(muk):
+        muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
+        pass
+
+class RunState_Mode4:
+    @staticmethod
+    def enter(muk, event):
+        if event == RIGHT_DOWN:
+            muk.velocity += RUN_SPEED_PPS
+        elif event == RIGHT_UP:
+            muk.velocity -= RUN_SPEED_PPS
+
+    @staticmethod
+    def exit(muk, event):
+        pass
+
+    @staticmethod
+    def do(muk):
+        muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
+        muk.x += muk.velocity * Framework.frame_time
+        pass
+
+    @staticmethod
+    def draw(muk):
+        muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
+        pass
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SPACE: IdleState},
