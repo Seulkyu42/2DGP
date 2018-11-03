@@ -24,7 +24,11 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_SPACE): SPACE
+    (SDL_KEYDOWN, SDLK_SPACE): SPACE,
+    (SDL_KEYDOWN, SDLK_1): Mode1,
+    (SDL_KEYDOWN, SDLK_2): Mode2,
+    (SDL_KEYDOWN, SDLK_3): Mode3,
+    (SDL_KEYDOWN, SDLK_4): Mode4,
 }
 
 class IdleState:
@@ -97,7 +101,7 @@ class RunState_Mode1:
     @staticmethod
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
-        muk.x -= muk.velocity * Framework.frame_time
+        muk.x += muk.velocity * Framework.frame_time
 
     @staticmethod
     def draw(muk):
@@ -118,7 +122,7 @@ class RunState_Mode2:
     @staticmethod
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
-        muk.y -= muk.velocity * Framework.frame_time
+        muk.y += muk.velocity * Framework.frame_time
 
     @staticmethod
     def draw(muk):
@@ -139,7 +143,7 @@ class RunState_Mode3:
     @staticmethod
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
-        muk.x += muk.velocity * Framework.frame_time
+        muk.x -= muk.velocity * Framework.frame_time
 
     @staticmethod
     def draw(muk):
@@ -160,21 +164,26 @@ class RunState_Mode4:
     @staticmethod
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
-        muk.y += muk.velocity * Framework.frame_time
+        muk.y -= muk.velocity * Framework.frame_time
 
     @staticmethod
     def draw(muk):
-        muk.Run_image.clip_composite_draw(int(muk.frame) * 110,0,110,200, 3.141492, '',muk.x,muk.y,110,200)
+        muk.Run_image.clip_composite_draw(int(muk.frame) * 110,0,110,200, -3.141492/2, '',muk.x,muk.y,110,200)
 
 
 next_state_table = {
-    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SPACE: IdleState},
+    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SPACE: IdleState,
+                Mode1: RunState_Mode1, Mode2: RunState_Mode2, Mode3: RunState_Mode3, Mode4: RunState_Mode4},
     RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,
                 Mode1 : RunState_Mode1,Mode2 : RunState_Mode2,Mode3 : RunState_Mode3,Mode4 : RunState_Mode4},
-    RunState_Mode1: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
-    RunState_Mode2: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
-    RunState_Mode3: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
-    RunState_Mode4: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
+    RunState_Mode1: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,
+                     Mode1: RunState_Mode1, Mode2: RunState_Mode2, Mode3: RunState_Mode3, Mode4: RunState_Mode4},
+    RunState_Mode2: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,
+                     Mode1: RunState_Mode1, Mode2: RunState_Mode2, Mode3: RunState_Mode3, Mode4: RunState_Mode4},
+    RunState_Mode3: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,
+                     Mode1: RunState_Mode1, Mode2: RunState_Mode2, Mode3: RunState_Mode3, Mode4: RunState_Mode4},
+    RunState_Mode4: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState
+                     ,Mode1 : RunState_Mode1,Mode2 : RunState_Mode2,Mode3 : RunState_Mode3,Mode4 : RunState_Mode4},
 }
 
 class Muk:
