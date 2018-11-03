@@ -16,14 +16,18 @@ Frame_Idle = 4
 Frame_Run = 6
 
 
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE = range(5)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE, Mode1, Mode2, Mode3, Mode4 = range(9)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_SPACE): SPACE
+    (SDL_KEYDOWN, SDLK_SPACE): SPACE,
+    (SDL_KEYDOWN, SDLK_1) : Mode1,
+    (SDL_KEYDOWN, SDLK_2) : Mode1,
+    (SDL_KEYDOWN, SDLK_3) : Mode1,
+    (SDL_KEYDOWN, SDLK_4) : Mode1
 }
 
 
@@ -50,6 +54,9 @@ class IdleState:
 class RunState:
     @staticmethod
     def enter(muk, event):
+        if Mode == 1:
+            muk.add_event()
+
         if event == RIGHT_DOWN:
             muk.velocity += RUN_SPEED_PPS
         elif event == RIGHT_UP:
@@ -63,10 +70,12 @@ class RunState:
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
         muk.x += muk.velocity * Framework.frame_time
+        pass
 
     @staticmethod
     def draw(muk):
         muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
+        pass
 
 
 next_state_table = {
