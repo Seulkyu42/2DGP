@@ -17,18 +17,14 @@ Frame_Run = 6
 
 Mode = 1
 
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE, Mode1, Mode2, Mode3, Mode4 = range(9)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE,Mode1,Mode2,Mode3,Mode4 = range(9)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_SPACE): SPACE,
-    (SDL_KEYDOWN, SDLK_1) : Mode1,
-    (SDL_KEYDOWN, SDLK_2) : Mode2,
-    (SDL_KEYDOWN, SDLK_3) : Mode3,
-    (SDL_KEYDOWN, SDLK_4) : Mode4
+    (SDL_KEYDOWN, SDLK_SPACE): SPACE
 }
 
 class IdleState:
@@ -45,6 +41,16 @@ class IdleState:
 
     @staticmethod
     def do(muk):
+        global Mode
+        if SDL_KEYDOWN == SDLK_1:
+            Mode = 1
+        elif SDL_KEYDOWN == SDLK_2:
+            Mode = 2
+        elif SDL_KEYDOWN == SDLK_3:
+            Mode = 3
+        elif SDL_KEYDOWN == SDLK_4:
+            Mode = 4
+
         muk.frame = (muk.frame + Frame_Idle * ACTION_PER_TIME * Framework.frame_time) % 4
 
     @staticmethod
@@ -56,13 +62,13 @@ class RunState:
     def enter(muk, event):
         global Mode
         if Mode == 1:
-            muk.add_event(RunState_Mode1)
+            muk.add_event(Mode1)
         elif Mode == 2:
-            muk.add_event(RunState_Mode2)
+            muk.add_event(Mode2)
         elif Mode == 3:
-            muk.add_event(RunState_Mode3)
+            muk.add_event(Mode3)
         elif Mode == 4:
-            muk.add_event(RunState_Mode4)
+            muk.add_event(Mode4)
 
     @staticmethod
     def exit(muk, event):
@@ -91,7 +97,7 @@ class RunState_Mode1:
     @staticmethod
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
-        muk.x += muk.velocity * Framework.frame_time
+        muk.x -= muk.velocity * Framework.frame_time
 
     @staticmethod
     def draw(muk):
@@ -107,11 +113,12 @@ class RunState_Mode2:
 
     @staticmethod
     def exit(muk, event):
+        pass
 
     @staticmethod
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
-        muk.x += muk.velocity * Framework.frame_time
+        muk.y -= muk.velocity * Framework.frame_time
 
     @staticmethod
     def draw(muk):
@@ -153,23 +160,27 @@ class RunState_Mode4:
     @staticmethod
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
-        muk.x += muk.velocity * Framework.frame_time
-        pass
+        muk.y += muk.velocity * Framework.frame_time
 
     @staticmethod
     def draw(muk):
-        muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
-        pass
+        muk.Run_image.clip_composite_draw(int(muk.frame) * 110,0,110,200, 3.141492, '',muk.x,muk.y,110,200)
+
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SPACE: IdleState},
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,
+                Mode1 : RunState_Mode1,Mode2 : RunState_Mode2,Mode3 : RunState_Mode3,Mode4 : RunState_Mode4},
+    RunState_Mode1: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
+    RunState_Mode2: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
+    RunState_Mode3: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
+    RunState_Mode4: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
 }
 
 class Muk:
 
     def __init__(self):
-        self.x, self.y = 0, 90
+        self.x, self.y = 500, 90
         self.Idle_image = load_image("Idle.png")
         self.Run_image = load_image("Right_run.png")
         self.dir = 1
