@@ -75,6 +75,7 @@ next_state_table = {
 }
 
 class Muk:
+
     def __init__(self):
         self.x, self.y = 0, 90
         self.Idle_image = load_image("Idle.png")
