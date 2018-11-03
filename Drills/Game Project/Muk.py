@@ -15,6 +15,7 @@ ACTION_PER_TIME = 1.0
 Frame_Idle = 4
 Frame_Run = 6
 
+Mode = 1
 
 RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE, Mode1, Mode2, Mode3, Mode4 = range(9)
 
@@ -53,6 +54,7 @@ class IdleState:
 class RunState:
     @staticmethod
     def enter(muk, event):
+        global Mode
         if Mode == 1:
             muk.add_event(RunState_Mode1)
         elif Mode == 2:
@@ -90,12 +92,10 @@ class RunState_Mode1:
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
         muk.x += muk.velocity * Framework.frame_time
-        pass
 
     @staticmethod
     def draw(muk):
         muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
-        pass
 
 class RunState_Mode2:
     @staticmethod
@@ -107,18 +107,15 @@ class RunState_Mode2:
 
     @staticmethod
     def exit(muk, event):
-        pass
 
     @staticmethod
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
         muk.x += muk.velocity * Framework.frame_time
-        pass
 
     @staticmethod
     def draw(muk):
-        muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
-        pass
+        muk.Run_image.clip_composite_draw(int(muk.frame) * 110,0,110,200, 3.141492/2, '',muk.x,muk.y,110,200)
 
 class RunState_Mode3:
     @staticmethod
@@ -136,12 +133,10 @@ class RunState_Mode3:
     def do(muk):
         muk.frame = (muk.frame + Frame_Run * ACTION_PER_TIME * Framework.frame_time) % 6
         muk.x += muk.velocity * Framework.frame_time
-        pass
 
     @staticmethod
     def draw(muk):
-        muk.Run_image.clip_draw(int(muk.frame) * 110, 0, 110, 200, muk.x, muk.y)
-        pass
+        muk.Run_image.clip_composite_draw(int(muk.frame) * 110,0,110,200, 3.141492, '',muk.x,muk.y,110,200)
 
 class RunState_Mode4:
     @staticmethod
