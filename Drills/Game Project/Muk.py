@@ -47,12 +47,16 @@ class IdleState:
     def do(muk):
         global Mode
         if SDL_KEYDOWN == SDLK_1:
+            muk.x, muk.y = 0, 90
             Mode = 1
         elif SDL_KEYDOWN == SDLK_2:
+            muk.x, muk.y = 1500, 90
             Mode = 2
         elif SDL_KEYDOWN == SDLK_3:
+            muk.x, muk.y = 1500, 800
             Mode = 3
         elif SDL_KEYDOWN == SDLK_4:
+            muk.x, muk.y = 0, 800
             Mode = 4
 
         muk.frame = (muk.frame + Frame_Idle * ACTION_PER_TIME * Framework.frame_time) % 4
