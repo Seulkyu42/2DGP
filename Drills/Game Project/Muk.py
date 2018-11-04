@@ -34,9 +34,7 @@ key_event_table = {
 class IdleState:
     @staticmethod
     def enter(muk, event):
-        if event == RIGHT_DOWN:
-            muk.velocity += RUN_SPEED_PPS
-        elif event == RIGHT_UP:
+        if event == RIGHT_UP:
             muk.velocity -= RUN_SPEED_PPS
 
     @staticmethod
@@ -68,6 +66,10 @@ class IdleState:
 class RunState:
     @staticmethod
     def enter(muk, event):
+        if event == RIGHT_DOWN:
+            muk.velocity += RUN_SPEED_PPS
+        elif event == RIGHT_UP:
+            muk.velocity -= RUN_SPEED_PPS
         global Mode
         if Mode == 1:
             muk.add_event(Mode1)
@@ -176,7 +178,7 @@ class RunState_Mode4:
 
 
 next_state_table = {
-    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SPACE: IdleState,
+    IdleState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState, SPACE: IdleState,
                 Mode1: RunState_Mode1, Mode2: RunState_Mode2, Mode3: RunState_Mode3, Mode4: RunState_Mode4},
     RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,
                 Mode1 : RunState_Mode1,Mode2 : RunState_Mode2,Mode3 : RunState_Mode3,Mode4 : RunState_Mode4},
