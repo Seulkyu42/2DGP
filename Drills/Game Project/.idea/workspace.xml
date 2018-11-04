@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7899c9-ecc5-44b3-a91a-e2c20f9a2671" name="Default Changelist" comment="" />
+    <list default="true" id="0b7899c9-ecc5-44b3-a91a-e2c20f9a2671" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Drills-13/ball.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills-13/ball.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Drills-13/boy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills-13/boy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Drills-13/main_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills-13/main_state.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
