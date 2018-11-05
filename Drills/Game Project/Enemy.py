@@ -15,7 +15,7 @@ class Monster1:
     def __init__(self):
         if Monster1.image == None:
             Monster1.image = load_image('Monster1.png')
-        self.x,self.y = 700, 50
+        self.x,self.y = 1300, 50
         self.frame = 0
 
     def update(self):

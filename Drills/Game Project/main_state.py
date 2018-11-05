@@ -10,6 +10,7 @@ from Muk import Muk
 from background import Back
 from Grass import Grass
 from Enemy import Monster1
+from Ui import Life
 
 name = "MainState"
 
@@ -17,17 +18,39 @@ muk = None
 back = None
 grass = None
 monster1 = None
+life = None
+
+def collide(a, b):
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+
+    if left_a > right_b : return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
+    return True
+
 
 def enter():
-    global muk,back,grass,monster1
+    global muk
     muk = Muk()
-    back = Back()
-    grass = Grass()
-    monster1 = Monster1()
-    game_world.add_object(back, 0)
     game_world.add_object(muk, 1)
-    game_world.add_object(monster1, 2)
+
+    global back
+    back = Back()
+    game_world.add_object(back, 0)
+
+    global grass
+    grass = Grass()
     game_world.add_object(grass,3)
+
+    global monster1
+    monster1 = Monster1()
+    game_world.add_object(monster1, 2)
+
+    global life
+    life = Life()
+    game_world.add_object(life,4)
 
 def exit():
     game_world.clear()
@@ -49,10 +72,15 @@ def handle_events():
         else:
             muk.handle_event(event)
 
+
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
 
+    if collide(muk,monster1):
+        print("충돌")
+        muk.x -= 100
+        muk.Life -= 1
 
 def draw():
     clear_canvas()

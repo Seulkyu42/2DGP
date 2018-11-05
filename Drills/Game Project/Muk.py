@@ -5,7 +5,7 @@ import os
 os.chdir("C:\\Users\\김민규\\Documents\\Github\\2DGP\\Drills\\Game Project\\Resources")
 
 PIXEL_PER_METER = (10.0/0.3)
-RUN_SPEED_KMPH = 20.0
+RUN_SPEED_KMPH = 30.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -117,6 +117,7 @@ class Muk:
         self.frame = 0
         self.font = load_font('ENCR10B.TTF', 16)
         self.Mode = 1
+        self.Life = 5
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
@@ -137,6 +138,7 @@ class Muk:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
+
 
     def draw(self):
         self.cur_state.draw(self)
