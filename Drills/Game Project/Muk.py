@@ -5,7 +5,7 @@ import os
 os.chdir("C:\\Users\\김민규\\Documents\\Github\\2DGP\\Drills\\Game Project\\Resources")
 
 PIXEL_PER_METER = (10.0/0.3)
-RUN_SPEED_KMPH = 20.0
+RUN_SPEED_KMPH = 40.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -23,11 +23,7 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_SPACE): SPACE,
-    (SDL_KEYDOWN, SDLK_1): Mode1,
-    (SDL_KEYDOWN, SDLK_2): Mode2,
-    (SDL_KEYDOWN, SDLK_3): Mode3,
-    (SDL_KEYDOWN, SDLK_4): Mode4,
+    (SDL_KEYDOWN, SDLK_SPACE): SPACE
 }
 
 class IdleState:
@@ -70,16 +66,12 @@ class RunState:
             muk.velocity -= RUN_SPEED_PPS
 
         if muk.Mode == 1:
-            print("Mode : 1")
             muk.add_event(Mode1)
-        if muk.Mode == 2:
-            print("Mode : 2")
+        elif muk.Mode == 2:
             muk.add_event(Mode2)
-        if muk.Mode == 3:
-            print("Mode : 3")
+        elif muk.Mode == 3:
             muk.add_event(Mode3)
-        if muk.Mode == 4:
-            print("Mode : 4")
+        elif muk.Mode == 4:
             muk.add_event(Mode4)
 
     @staticmethod

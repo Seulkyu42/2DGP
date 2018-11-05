@@ -10,12 +10,11 @@ class Grass:
     def __init__(self):
         self.image = load_image('Grass.png')
 
-    #def enter(self):
-    #    global muk
-    #    muk = Muk()
+    def enter(self):
+        pass
 
     def update(self):
-        pass
+        update_canvas()
 
     def draw(self):
         global muk
