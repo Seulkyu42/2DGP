@@ -70,12 +70,16 @@ class RunState:
             muk.velocity -= RUN_SPEED_PPS
 
         if muk.Mode == 1:
+            print("Mode : 1")
             muk.add_event(Mode1)
-        elif muk.Mode == 2:
+        if muk.Mode == 2:
+            print("Mode : 2")
             muk.add_event(Mode2)
-        elif muk.Mode == 3:
+        if muk.Mode == 3:
+            print("Mode : 3")
             muk.add_event(Mode3)
-        elif muk.Mode == 4:
+        if muk.Mode == 4:
+            print("Mode : 4")
             muk.add_event(Mode4)
 
     @staticmethod
@@ -191,7 +195,6 @@ next_state_table = {
 }
 
 class Muk:
-
     def __init__(self):
         self.x, self.y = 500, 90
         self.Idle_image = load_image("Idle.png")
@@ -226,7 +229,7 @@ class Muk:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+        self.font.draw(self.x - 55, self.y + 110, '(Mode : %d)' % self.Mode, (255, 0, 0))
         draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
