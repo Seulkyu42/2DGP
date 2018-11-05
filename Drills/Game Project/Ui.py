@@ -1,10 +1,9 @@
 from pico2d import *
 import os
-from Muk import Muk
+import main_state
 
 os.chdir("C:\\Users\\김민규\\Documents\\Github\\2DGP\\Drills\\Game Project\\Resources")
 
-muk = None
 
 class Life:
     def __init__(self):
@@ -14,10 +13,8 @@ class Life:
         pass
 
     def update(self):
-        global muk
-        muk = Muk()
-        for i in range(0, muk.Life):
-            self.image.draw(100 + 50 * i, 850)
+        pass
 
     def draw(self):
-        self.update()
+        for i in range(0, main_state.muk.Life):
+            self.image.draw(100 + 50 * i, 850)

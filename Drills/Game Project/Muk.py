@@ -139,7 +139,6 @@ class Muk:
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
 
-
     def draw(self):
         self.cur_state.draw(self)
         self.font.draw(self.x - 55, self.y + 110, '(Mode : %d)' % self.Mode, (255, 0, 0))

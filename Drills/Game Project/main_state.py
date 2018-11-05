@@ -17,8 +17,9 @@ name = "MainState"
 muk = None
 back = None
 grass = None
-monster1 = None
 life = None
+
+monsters = []
 
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -44,9 +45,9 @@ def enter():
     grass = Grass()
     game_world.add_object(grass,3)
 
-    global monster1
-    monster1 = Monster1()
-    game_world.add_object(monster1, 2)
+    global monsters
+    monsters = [Monster1() for i in range(5)]
+    game_world.add_object(monsters, 2)
 
     global life
     life = Life()
@@ -57,7 +58,6 @@ def exit():
 
 def pause():
     pass
-
 
 def resume():
     pass
@@ -74,13 +74,17 @@ def handle_events():
 
 
 def update():
+    global muk,monster1
     for game_object in game_world.all_objects():
         game_object.update()
 
-    if collide(muk,monster1):
-        print("충돌")
-        muk.x -= 100
-        muk.Life -= 1
+    for Enemy in monsters:
+        if collide(muk, Enemy):
+            print("충돌")
+            muk.x -= 100
+            muk.Life -= 1
+            print("Life %d" % muk.Life)
+
 
 def draw():
     clear_canvas()
