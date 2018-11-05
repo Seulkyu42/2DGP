@@ -23,7 +23,7 @@ def enter():
     muk = Muk()
     back = Back()
     grass = Grass()
-    monster1 = Monster1
+    monster1 = Monster1()
     game_world.add_object(back, 0)
     game_world.add_object(muk, 1)
     game_world.add_object(monster1, 2)
@@ -39,7 +39,6 @@ def pause():
 def resume():
     pass
 
-
 def handle_events():
     events = get_events()
     for event in events:
@@ -49,7 +48,6 @@ def handle_events():
                 Framework.quit()
         else:
             muk.handle_event(event)
-
 
 def update():
     for game_object in game_world.all_objects():
