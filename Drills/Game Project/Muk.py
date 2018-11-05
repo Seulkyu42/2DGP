@@ -46,7 +46,14 @@ class IdleState:
 
     @staticmethod
     def draw(muk):
-        muk.Idle_image.clip_draw(int(muk.frame) * 100, 0, 100, 200, muk.x, muk.y)
+        if muk.Mode == 1:
+            muk.Idle_image.clip_draw(int(muk.frame) * 100, 0, 100, 200, muk.x, muk.y)
+        elif muk.Mode == 2:
+            muk.Idle_image.clip_composite_draw(int(muk.frame) * 100, 0, 100, 200, 3.141492 / 2, '', muk.x, muk.y, 100,200)
+        elif muk.Mode == 3:
+            muk.Idle_image.clip_composite_draw(int(muk.frame) * 100, 0, 100, 200, 3.141492, '', muk.x, muk.y, 100, 200)
+        elif muk.Mode == 4:
+            muk.Idle_image.clip_composite_draw(int(muk.frame) * 100, 0, 100, 200, -3.141492 / 2, '', muk.x, muk.y, 100,200)
 
 class RunState:
     @staticmethod
