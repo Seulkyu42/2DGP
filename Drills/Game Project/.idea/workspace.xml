@@ -4,6 +4,7 @@
     <list default="true" id="0b7899c9-ecc5-44b3-a91a-e2c20f9a2671" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Drills-13/ball.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills-13/ball.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Drills-13/boy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills-13/boy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Drills-13/grass.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills-13/grass.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Drills-13/main_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills-13/main_state.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,7 +17,7 @@
     <session id="62963873">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.4" value="2" />
@@ -186,7 +187,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -305,7 +306,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1047" extended-state="1" />
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" weight="0.26495728" />
@@ -316,7 +317,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32092005" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.32092005" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4162103" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
