@@ -15,7 +15,6 @@ ACTION_PER_TIME = 1.0
 Frame_Idle = 4
 Frame_Run = 6
 
-Mode = 1
 
 RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE,Mode1,Mode2,Mode3,Mode4 = range(9)
 
@@ -43,19 +42,18 @@ class IdleState:
 
     @staticmethod
     def do(muk):
-        global Mode
         if SDL_KEYDOWN == SDLK_1:
             muk.x, muk.y = 0, 90
-            Mode = 1
+            muk.Mode = 1
         elif SDL_KEYDOWN == SDLK_2:
             muk.x, muk.y = 1500, 90
-            Mode = 2
+            muk.Mode = 2
         elif SDL_KEYDOWN == SDLK_3:
             muk.x, muk.y = 1500, 800
-            Mode = 3
+            muk.Mode = 3
         elif SDL_KEYDOWN == SDLK_4:
             muk.x, muk.y = 0, 800
-            Mode = 4
+            muk.Mode = 4
 
         muk.frame = (muk.frame + Frame_Idle * ACTION_PER_TIME * Framework.frame_time) % 4
 
@@ -70,14 +68,14 @@ class RunState:
             muk.velocity += RUN_SPEED_PPS
         elif event == RIGHT_UP:
             muk.velocity -= RUN_SPEED_PPS
-        global Mode
-        if Mode == 1:
+
+        if muk.Mode == 1:
             muk.add_event(Mode1)
-        elif Mode == 2:
+        elif muk.Mode == 2:
             muk.add_event(Mode2)
-        elif Mode == 3:
+        elif muk.Mode == 3:
             muk.add_event(Mode3)
-        elif Mode == 4:
+        elif muk.Mode == 4:
             muk.add_event(Mode4)
 
     @staticmethod
@@ -201,9 +199,19 @@ class Muk:
         self.dir = 1
         self.velocity = 0
         self.frame = 0
+        self.font = load_font('ENCR10B.TTF', 16)
+        self.Mode = 1
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
+
+    def get_bb(self):
+        if self.Mode == 1 or self.Mode == 3:
+            return self.x - 50, self.y - 100, self.x + 50, self.y + 100
+        elif self.Mode == 2 or self.Mode == 4:
+            return self.x - 100, self.y - 50, self.x + 100, self.y + 50
+
+
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -218,6 +226,8 @@ class Muk:
 
     def draw(self):
         self.cur_state.draw(self)
+        self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
+        draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
