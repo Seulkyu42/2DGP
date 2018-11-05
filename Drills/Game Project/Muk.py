@@ -5,7 +5,7 @@ import os
 os.chdir("C:\\Users\\김민규\\Documents\\Github\\2DGP\\Drills\\Game Project\\Resources")
 
 PIXEL_PER_METER = (10.0/0.3)
-RUN_SPEED_KMPH = 40.0
+RUN_SPEED_KMPH = 20.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -126,9 +126,6 @@ class Muk:
             return self.x - 50, self.y - 100, self.x + 50, self.y + 100
         elif self.Mode == 2 or self.Mode == 4:
             return self.x - 100, self.y - 50, self.x + 100, self.y + 50
-
-    def Path(self):
-        pass
 
     def add_event(self, event):
         self.event_que.insert(0, event)

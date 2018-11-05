@@ -14,7 +14,7 @@ class Grass:
         pass
 
     def update(self):
-        update_canvas()
+        pass
 
     def draw(self):
         global muk

@@ -9,21 +9,25 @@ import game_world
 from Muk import Muk
 from background import Back
 from Grass import Grass
+from Enemy import Monster1
 
 name = "MainState"
 
 muk = None
 back = None
 grass = None
+monster1 = None
 
 def enter():
-    global muk,back,grass
+    global muk,back,grass,monster1
     muk = Muk()
     back = Back()
     grass = Grass()
+    monster1 = Monster1
     game_world.add_object(back, 0)
     game_world.add_object(muk, 1)
-    game_world.add_object(grass,2)
+    game_world.add_object(monster1, 2)
+    game_world.add_object(grass,3)
 
 def exit():
     game_world.clear()
