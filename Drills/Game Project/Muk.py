@@ -66,12 +66,16 @@ class RunState:
     @staticmethod
     def exit(muk, event):
         if event == Mode1:
+            muk.x,muk.y = 100,75
             muk.Mode = 1
         elif event == Mode2:
+            muk.x,muk.y = 1500,75
             muk.Mode = 2
         elif event == Mode3:
+            muk.x,muk.y = 1500,750
             muk.Mode = 3
         elif event == Mode4:
+            muk.x,muk.y = 100,750
             muk.Mode = 4
 
     @staticmethod
