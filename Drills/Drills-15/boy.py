@@ -75,9 +75,10 @@ class WalkingState:
 
         #boy.x = clamp(0,boy.x,boy.bg.w)
         #boy.y = clamp(0,boy.y,boy.bg.h)
-        ml = (1100 - 70) / (200 - 0) / 30
-        mr = (1100 - 70) / (1830 - 1640) / 30
-        boy.x = clamp(ml * boy.y, boy.x, -mr * boy.y + 1830)
+        # 직선의 방정식
+        ml = (1100 - 70) / (200 - 0) / 30        #기울기m + 왼쪽l = ml
+        mr = (1100 - 70) / (1830 - 1640) / 30    #기울기m + 오른쪽r = mr
+        boy.x = clamp(20 + ml * boy.y, boy.x, -mr * boy.y + 1830) # 20 더한이유 : 캐릭터 그림 크기
         boy.y = clamp(70, boy.y, 1100)
 
 # 왼쪽 위 200, 1100
