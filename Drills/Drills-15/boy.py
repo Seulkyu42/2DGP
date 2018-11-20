@@ -75,6 +75,9 @@ class WalkingState:
 
         #boy.x = clamp(0,boy.x,boy.bg.w)
         #boy.y = clamp(0,boy.y,boy.bg.h)
+        ml = (1100 - 70) / (200 - 0) / 30
+        boy.x = clamp(ml * boy.y, boy.x, 1800)
+        boy.y = clamp(70, boy.y, 1100)
 
 # 왼쪽 위 200, 1100
 # 왼쪽 아래 0, 70
