@@ -76,10 +76,17 @@ class WalkingState:
         #boy.x = clamp(0,boy.x,boy.bg.w)
         #boy.y = clamp(0,boy.y,boy.bg.h)
 
+# 왼쪽 위 200, 1100
+# 왼쪽 아래 0, 70
+# 오른쪽위 1640,1100
+# 오른쪽 아래 1830,70
+
+
     @staticmethod
     def draw(boy):
         #cx,cy = boy.canvas_width//2,boy.canvas_height//2
-        cx,cy = boy.canvas_width//2, boy.canvas_height//2
+        cx, cy = boy.x - boy.bg.window_left, boy.y - boy.bg.window_bottom
+
         if boy.x_velocity > 0:
             boy.image.clip_draw(int(boy.frame) * 100, 100, 100, 100, cx, cy)
             boy.dir = 1
