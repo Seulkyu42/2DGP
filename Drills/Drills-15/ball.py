@@ -21,5 +21,5 @@ class Ball:
         draw_rectangle(*self.get_bb())
 
     def update(self):
-        self.bx = self.x - main_state.boy.x
-        self.by = self.y - main_state.boy.y
+        self.bx = self.x - clamp(400,main_state.boy.x,1435)
+        self.by = self.y - clamp(300,main_state.boy.y,810)
