@@ -145,12 +145,12 @@ class Boy:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
 
-        # fill heree
+        self.eat_sound = load_wav("pickup.wav")
+        self.eat_sound.set_volume(32)
 
 
     def eat(self, ball):
-        # fill here
-        pass
+        self.eat_sound.play()
 
 
     def get_bb(self):
