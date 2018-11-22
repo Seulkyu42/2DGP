@@ -89,8 +89,8 @@ class WalkingState:
 
     @staticmethod
     def draw(boy):
-        cx,cy = boy.canvas_width//2,boy.canvas_height//2
-        #cx, cy = boy.x - boy.bg.window_left, boy.y - boy.bg.window_bottom
+        #cx,cy = boy.canvas_width//2,boy.canvas_height//2
+        cx, cy = boy.x - boy.bg.window_left, boy.y - boy.bg.window_bottom
 
         if boy.x_velocity > 0:
             boy.image.clip_draw(int(boy.frame) * 100, 100, 100, 100, cx, cy)
@@ -142,7 +142,8 @@ class Boy:
         self.y = self.bg.h / 2
 
     def get_bb(self):
-        return  350, 250,  450, 350
+        #return  350, 250,  450, 350
+        return self.x - self.bg.window_left -50, self.y - self.bg.window_bottom - 50,self.x - self.bg.window_left +50, self.y - self.bg.window_bottom +50
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -157,8 +158,8 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
-        #self.font.draw(-75 + self.x - self.bg.window_left,50 + self.y - self.bg.window_bottom, '(Ball : %d)' % self.count, (0, 255, 255))
-        self.font.draw(350, 350, '(Ball %d)' % self.count, (255, 0, 255))
+        self.font.draw(-75 + self.x - self.bg.window_left,50 + self.y - self.bg.window_bottom, '(Ball : %d)' % self.count, (0, 255, 255))
+        #self.font.draw(350, 350, '(Ball %d)' % self.count, (255, 0, 255))
         draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
