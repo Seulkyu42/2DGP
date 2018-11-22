@@ -9,6 +9,8 @@ class FixedBackground:
         self.image = load_image('futsal_court.png')
         self.canvas_width = get_canvas_width()
         self.canvas_height = get_canvas_height()
+        self.window_left = 0
+        self.window_bottom = 0
         self.w = self.image.w
         self.h = self.image.h
 
