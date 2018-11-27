@@ -55,12 +55,11 @@ def update():
     global data_str,line,font
     if font == None:
         font = load_font('ENCR10B.TTF', 20)
-    if(data_str == None):
-        file = open('ranking_data.json', 'r')
-        data_str = file.read()
+    file = open('ranking_data.json', 'r')
+    data_str = file.read()
 
-    for i in range ():
-        font.draw(get_canvas_width() // 2 - 100, 700 - (i * 50), data_str, (0, 0, 0))
+    for i in range (5):
+        font.draw(get_canvas_width() // 2 - 100, get_canvas_height() // 2, data_str, (0, 0, 0))
 
 def draw():
     clear_canvas()

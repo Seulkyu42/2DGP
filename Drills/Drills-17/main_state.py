@@ -74,7 +74,7 @@ def update():
         if collide(boy,game_object):
             if isinstance(game_object, Zombie):
                 with open('ranking_data.json', 'a') as file:
-                    file.write('Score : {0} \n'.format(round(boy.score, 2)))
+                    file.write('[{0}],   '.format(round(boy.score, 2)))
 
                 game_framework.change_state(ranking_state)
                 print("ㅅㄱ")
