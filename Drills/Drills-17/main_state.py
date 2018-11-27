@@ -6,10 +6,14 @@ import os
 from pico2d import *
 import game_framework
 import game_world
-
+import ranking_state
 import world_build_state
 
+from boy import Boy
+from zombie import Zombie
+
 name = "MainState"
+
 
 
 def collide(a, b):
@@ -25,12 +29,16 @@ def collide(a, b):
     return True
 
 boy = None
+zombie = None
 
 def enter():
     # game world is prepared already in world_build_state
     global boy
     boy = world_build_state.get_boy()
-    pass
+
+    global zombie
+    zombie = world_build_state.get_zombie()
+
 
 def exit():
     game_world.clear()
@@ -59,6 +67,18 @@ def handle_events():
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
+
+    global boy,zombie
+
+    for game_object in game_world.all_objects():
+        if collide(boy,game_object):
+            if isinstance(game_object, Zombie):
+                with open('ranking_data.json', 'a') as file:
+                    file.write('Score : {0} \n'.format(round(boy.score, 2)))
+
+                game_framework.change_state(ranking_state)
+                print("ㅅㄱ")
+
 
 
 def draw():
