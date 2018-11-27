@@ -46,12 +46,14 @@ class Zombie:
 
     def __getstate__(self):
         # fill here
-        pass
-
+        state = {'x' : self.x, 'y':self.y, 'dir':self.dir,
+                  'name' : self.name,'size':self.size}
+        return state
 
     def __setstate__(self, state):
         # fill here
-        pass
+        self.__init__()
+        self.__dict__.update(state)
 
 
     def wander(self):
@@ -62,7 +64,6 @@ class Zombie:
             self.dir = random.random()*2*math.pi
 
         return BehaviorTree.SUCCESS
-
 
     def find_player(self):
         boy = world_build_state.get_boy()
